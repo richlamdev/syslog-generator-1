@@ -88,7 +88,9 @@ def syslogs_sender():
         syslog.setFormatter(format)
 
         print(
-            "[+] Sent: {0}: {1} {2}".format(time_output, random_host, message),
+            "[+] Sent: {0}: {1} {2} ".format(
+                time_output, random_host, message
+            ),
             end="",
         )
 
