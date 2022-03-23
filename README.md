@@ -13,7 +13,8 @@ This script is written for Python 3+ and is meant to be run from the command lin
 
 * --host: IP or hostname to send syslog messages.
 * --port: UDP port to send syslog messages.  
-* --file: Filename to read syslog messasges from. This file should contain ONLY the text of the message. Syslog format is handled by the script. 
+* --msg: Filename to read syslog messasges from. This file should contain ONLY the text of the message. Syslog format is handled by the script. 
+* --src_names: Filename to read random hosts from.  This file may contain IP or hostname, one per line.
 * --count: Number of messages to send at one time. 
 
 #### Optional Arguments
@@ -24,10 +25,12 @@ This script is written for Python 3+ and is meant to be run from the command lin
 
 Send 10 messages at once:
 ```
-syslog_gen.py --host 192.168.1.100 --port 514 --file sample_logs --count 10 
+python3 syslog_gen.py --host 10.0.1.90 --port 514 --msg random_message.txt --src_names random_hosts.txt --count 10
+
 ```
 
 Send 10 messages every 30 seconds:
 ```
-syslog_gen.py --host 192.168.1.100 --port 514 --file sample_logs --count 10 --sleep 30 
+python3 syslog_gen.py --host 10.0.1.90 --port 514 --msg random_message.txt --src_names random_hosts.txt --count 10 --sleep 30
+
 ```
