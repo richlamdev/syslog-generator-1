@@ -68,21 +68,17 @@ def syslogs_sender():
         random_host = open_hosts(args.src_names)
         random_tag = random.choice(tag)
         random_level = random.choice(syslog_level)
-        # original fqdn below
+        # commented out fqdn, IP or short hostname will only be used
         # fqdn = "{0}{1}{2}".format(hostname, random_host, domain_name)
         random_pid = random.choice(range(500, 9999))
 
-        message = open_sample_log(args.file)
+        message = open_sample_log(args.msg)
         fields = {
             # "host_field": fqdn,
             "host_field": random_host,
             "date_field": time_output,
             "tag_field": random_tag,
         }
-
-        print(fields["host_field"])
-        print(fields["date_field"])
-        print(fields["tag_field"])
 
         format = logging.Formatter(
             "%(date_field)s %(host_field)s {0}[{1}]: %(message)s".format(
@@ -91,7 +87,10 @@ def syslogs_sender():
         )
         syslog.setFormatter(format)
 
-        print("[+] Sent: {0}: {1}".format(time_output, message), end="")
+        print(
+            "[+] Sent: {0}: {1} {2}".format(time_output, random_host, message),
+            end="",
+        )
 
         getattr(logger, random_level)(message, extra=fields)
 
@@ -108,13 +107,11 @@ if __name__ == "__main__":
     parser.add_argument(
         "--port", type=int, required=True, help="Remote port to send messages"
     )
-    parser.add_argument(
-        "--file", required=True, help="Read messages from file"
-    )
+    parser.add_argument("--msg", required=True, help="Read messages from file")
     parser.add_argument(
         "--src_names",
         required=True,
-        help="Obtain random hostname for the source host",
+        help="Obtain random hostname or ip for the source host",
     )
     parser.add_argument(
         "--count", type=int, required=True, help="Number of messages to send"
