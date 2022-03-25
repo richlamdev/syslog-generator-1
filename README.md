@@ -25,7 +25,7 @@ This script is written for Python 3+ and is meant to be run from the command lin
 
 Send 10 messages at once:
 ```
-python3 syslog_gen.py --host 10.0.1.90 --port 514 --msg random_message.txt --src_names random_hosts.txt --count 10
+python3 syslog_gen.py --port 514 --msg random_message.txt --src_names random_hosts.txt --count 10 --host 10.0.1.90
 
 ```
 
